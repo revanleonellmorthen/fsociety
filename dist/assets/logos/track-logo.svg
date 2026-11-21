@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 48" fill="none">
+  <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#trackGrad)" />
+  <!-- Compass / Academic Information icon -->
+  <circle cx="24" cy="24" r="12" stroke="#ffffff" stroke-width="2.2" />
+  <polygon points="24,16 27,24 24,32 21,24" fill="#f59e0b" />
+  <circle cx="24" cy="24" r="2" fill="#ffffff" />
+  
+  <text x="56" y="27" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="20" fill="#0f172a" letter-spacing="1.5">TRACK</text>
+  <text x="56" y="40" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="9" fill="#64748b" letter-spacing="1.2">ACADEMIC INFO</text>
+
+  <defs>
+    <linearGradient id="trackGrad" x1="2" y1="2" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#334155"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+</svg>

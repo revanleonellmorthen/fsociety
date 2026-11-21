@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="14" fill="url(#tealIconGrad)" />
+  <!-- Horizon arc & gold crest -->
+  <path d="M12 25C12 18.3726 17.3726 13 24 13C30.6274 13 36 18.3726 36 25" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="24" cy="21" r="4.5" fill="#CEAE65" />
+  <path d="M15 33C18.5 30 29.5 30 33 33" stroke="#c5d8d6" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="24" cy="35" r="2" fill="#CEAE65" />
+  <defs>
+    <linearGradient id="tealIconGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07455C"/>
+      <stop offset="1" stop-color="#082F3D"/>
+    </linearGradient>
+  </defs>
+</svg>

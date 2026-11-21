@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Circular container background -->
+  <circle cx="60" cy="60" r="60" fill="#F1F5F4" />
+  
+  <!-- Subtle gradient background -->
+  <circle cx="60" cy="60" r="58" fill="url(#bgGrad)" />
+
+  <!-- Body / Formal Shirt with Tie (matching student ID photo from reference screenshot) -->
+  <path d="M15 118 C18 90 35 78 60 78 C85 78 102 90 105 118 Z" fill="#ffffff" />
+  <!-- Tie (Dark Teal & Gold accent) -->
+  <polygon points="56,82 64,82 66,108 60,116 54,108" fill="#07455C" />
+  <line x1="57" y1="92" x2="63" y2="92" stroke="#CEAE65" stroke-width="1.5" />
+  <line x1="58" y1="102" x2="62" y2="102" stroke="#CEAE65" stroke-width="1.5" />
+  
+  <!-- Shirt collar -->
+  <polygon points="46,80 60,94 56,80" fill="#f7f8f5" />
+  <polygon points="74,80 60,94 64,80" fill="#f7f8f5" />
+
+  <!-- Neck -->
+  <rect x="52" y="66" width="16" height="18" rx="8" fill="#fed7aa" />
+
+  <!-- Head -->
+  <ellipse cx="60" cy="50" rx="22" ry="26" fill="#fed7aa" />
+
+  <!-- Neat Hair (Dark Deep Teal) -->
+  <path d="M38 46 C38 24 50 20 60 20 C72 20 82 24 82 46 C80 46 76 38 70 40 C64 42 60 38 52 40 C44 42 40 46 38 46 Z" fill="#082F3D" />
+
+  <!-- Eyes & Eyebrows -->
+  <circle cx="52" cy="48" r="2.5" fill="#082F3D" />
+  <circle cx="68" cy="48" r="2.5" fill="#082F3D" />
+  <path d="M48 43 Q52 41 56 43" stroke="#082F3D" stroke-width="1.8" stroke-linecap="round" fill="none" />
+  <path d="M64 43 Q68 41 72 43" stroke="#082F3D" stroke-width="1.8" stroke-linecap="round" fill="none" />
+
+  <!-- Friendly smile -->
+  <path d="M54 58 Q60 63 66 58" stroke="#082F3D" stroke-width="1.8" stroke-linecap="round" fill="none" />
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1F5F4"/>
+      <stop offset="1" stop-color="#e2eceb"/>
+    </linearGradient>
+  </defs>
+</svg>

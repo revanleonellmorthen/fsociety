@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" fill="none">
+  <!-- Crest Icon -->
+  <rect x="4" y="4" width="48" height="48" rx="14" fill="url(#tealGrad)" />
+  <path d="M16 28C16 21.3726 21.3726 16 28 16C34.6274 16 40 21.3726 40 28" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="28" cy="24" r="4.5" fill="#CEAE65" />
+  <path d="M19 36C22.5 33 33.5 33 37 36" stroke="#c5d8d6" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="28" cy="38" r="2" fill="#CEAE65" />
+  
+  <!-- Typography -->
+  <text x="64" y="29" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="20" fill="#082F3D" letter-spacing="1">CAKRAWALA</text>
+  <text x="64" y="43" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="10" fill="#07455C" letter-spacing="2.5">ACADEMIC HUB</text>
+
+  <defs>
+    <linearGradient id="tealGrad" x1="4" y1="4" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07455C"/>
+      <stop offset="1" stop-color="#082F3D"/>
+    </linearGradient>
+  </defs>
+</svg>
