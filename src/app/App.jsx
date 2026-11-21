@@ -2,7 +2,7 @@ import React from 'react';
 import { RouterProvider, useRouter } from './router';
 import AppLayout from '../components/layout/AppLayout';
 import Home from '../pages/home/Home';
-import RisePlaceholder from '../pages/rise/RisePlaceholder';
+import RiseModule from '../pages/rise/RiseModule';
 import TrackPlaceholder from '../pages/track/TrackPlaceholder';
 
 const AppContent = () => {
@@ -10,13 +10,18 @@ const AppContent = () => {
 
   const renderCurrentPage = () => {
     if (currentPath.startsWith('/rise')) {
-      return <RisePlaceholder />;
+      return <RiseModule />;
     }
     if (currentPath.startsWith('/track')) {
       return <TrackPlaceholder />;
     }
     return <Home />;
   };
+
+  /* RISE module has its own layout (sidebar+topbar) so no AppLayout wrapper */
+  if (currentPath.startsWith('/rise')) {
+    return <RiseModule />;
+  }
 
   return (
     <AppLayout>

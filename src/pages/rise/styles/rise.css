@@ -1,0 +1,2546 @@
+/* ============================================================
+   RISE MODULE — Academic Learning Management System (LMS)
+   All selectors strictly prefixed with .rise- to prevent
+   style leaking into Home, TRACK, or other Cakrawala modules.
+   CSS variables use --rise-* namespace scoped under .rise-container.
+   Color Palette:
+     - Primary Dark Teal:  #07455C
+     - Deep Teal:          #082F3D (Dark Sidebar, Main Text)
+     - Light Teal:         #E8F4F7
+     - Primary Hover:      #0A5A77
+     - Gold Accent:        #CEAE65 (Active Nav, Highlights)
+     - Gold Light:         #FAF4E6
+     - Gold Hover:         #BFA055
+     - Background:         #F7F8F5
+     - Surface / Card:     #FFFFFF
+     - Border:             #DDE5E4
+     - Secondary Text:     #65747A
+     - Muted Text:         #94A3A8
+   ============================================================ */
+
+/* ---- Design Tokens (Scoped under .rise-container) --------- */
+.rise-container {
+  /* Brand Teal Palette */
+  --rise-primary:         #07455C;
+  --rise-primary-deep:    #082F3D;
+  --rise-primary-light:   #E8F4F7;
+  --rise-primary-hover:   #0A5A77;
+
+  /* Gold Accent Palette */
+  --rise-gold:            #CEAE65;
+  --rise-gold-light:      #FAF4E6;
+  --rise-gold-hover:      #BFA055;
+
+  /* Neutral & Surface Palette */
+  --rise-bg:              #F7F8F5;
+  --rise-bg-sidebar:      #082F3D;
+  --rise-card-bg:         #FFFFFF;
+  --rise-card-bg-elevated:#FFFFFF;
+  --rise-border:          #DDE5E4;
+  --rise-border-hover:    #C5D0CF;
+  --rise-border-subtle:   rgba(7, 69, 92, 0.08);
+
+  /* Typography Colors */
+  --rise-text-primary:    #082F3D;
+  --rise-text-secondary:  #65747A;
+  --rise-text-muted:      #94A3A8;
+  --rise-text-inverse:    #FFFFFF;
+  --rise-text-gold:       #CEAE65;
+
+  /* Semantic Feedback Colors */
+  --rise-success:         #10B981;
+  --rise-success-light:   #ECFDF5;
+  --rise-warning:         #F59E0B;
+  --rise-warning-light:   #FFFBEB;
+  --rise-danger:          #EF4444;
+  --rise-danger-light:    #FEF2F2;
+  --rise-info:            #0EA5E9;
+  --rise-info-light:      #E0F2FE;
+  --rise-neutral:         #64748B;
+  --rise-neutral-light:   #F1F5F9;
+
+  /* Geometry & Radii */
+  --rise-radius-sm:       6px;
+  --rise-radius-md:       10px;
+  --rise-radius-lg:       14px;
+  --rise-radius-xl:       20px;
+  --rise-radius-full:     9999px;
+
+  /* Elevation & Shadows */
+  --rise-shadow-sm:       0 1px 3px rgba(7, 69, 92, 0.06), 0 1px 2px rgba(7, 69, 92, 0.04);
+  --rise-shadow-md:       0 4px 14px rgba(7, 69, 92, 0.08), 0 2px 4px rgba(7, 69, 92, 0.04);
+  --rise-shadow-lg:       0 12px 32px rgba(8, 47, 61, 0.12), 0 4px 8px rgba(8, 47, 61, 0.04);
+  --rise-shadow-gold:     0 4px 16px rgba(206, 174, 101, 0.25);
+  --rise-shadow-teal:     0 8px 24px rgba(7, 69, 92, 0.22);
+
+  /* Transitions & Dimensions */
+  --rise-transition:      all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --rise-sidebar-width:   260px;
+  --rise-sidebar-collapsed-width: 72px;
+
+  /* Base Root Styles */
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--rise-bg);
+  color: var(--rise-text-primary);
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container collapsed state helper */
+.rise-container.rise-sidebar-collapsed-container {
+  /* optional hook for container-level modifications */
+}
+
+/* ============================================================
+   1. LAYOUT — SIDEBAR, MAIN, TOPBAR, CONTENT
+   ============================================================ */
+
+/* ---- Mobile Backdrop Overlay ------------------------------- */
+.rise-mobile-overlay {
+  display: none;
+}
+
+/* ---- Dark Premium Sidebar ---------------------------------- */
+.rise-sidebar {
+  width: var(--rise-sidebar-width);
+  min-width: var(--rise-sidebar-width);
+  background: var(--rise-bg-sidebar);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: var(--rise-transition);
+  z-index: 100;
+  position: relative;
+  color: #FFFFFF;
+}
+
+/* Collapsed Sidebar variant */
+.rise-sidebar-collapsed {
+  width: var(--rise-sidebar-collapsed-width);
+  min-width: var(--rise-sidebar-collapsed-width);
+}
+
+.rise-sidebar-collapsed .rise-sidebar-brand {
+  justify-content: center;
+  padding: 18px 0;
+}
+
+.rise-sidebar-collapsed .rise-nav-link {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.rise-sidebar-collapsed .rise-sidebar-user {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+/* ---- Sidebar Brand Header ---------------------------------- */
+.rise-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 68px;
+  box-sizing: border-box;
+}
+
+.rise-sidebar-brand-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--rise-primary), #0A5A77);
+  border: 1.5px solid var(--rise-gold);
+  border-radius: var(--rise-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(206, 174, 101, 0.25);
+  color: var(--rise-gold);
+  transition: var(--rise-transition);
+}
+
+.rise-sidebar-brand-icon:hover {
+  transform: scale(1.05);
+  border-color: #FFFFFF;
+}
+
+.rise-sidebar-brand-text {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rise-sidebar-brand-text h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.rise-sidebar-brand-text span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rise-gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 1px;
+}
+
+/* ---- Sidebar Navigation ------------------------------------ */
+.rise-sidebar-nav {
+  flex: 1;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rise-nav-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  padding: 14px 12px 6px;
+  user-select: none;
+}
+
+.rise-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--rise-radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: var(--rise-transition);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.rise-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+.rise-nav-link:hover svg {
+  color: #FFFFFF;
+}
+
+/* Gold active state */
+.rise-nav-link.active {
+  background: rgba(206, 174, 101, 0.12);
+  color: var(--rise-gold);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--rise-gold);
+}
+
+.rise-nav-link.active svg {
+  color: var(--rise-gold);
+}
+
+.rise-nav-link svg {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  color: rgba(255, 255, 255, 0.65);
+  transition: var(--rise-transition);
+}
+
+.rise-nav-link-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ---- Sidebar Footer & User Profile ------------------------- */
+.rise-sidebar-footer {
+  padding: 12px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rise-sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--rise-radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--rise-transition);
+}
+
+.rise-sidebar-user:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(206, 174, 101, 0.3);
+}
+
+.rise-sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rise-primary-deep), var(--rise-primary));
+  border: 1.5px solid var(--rise-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rise-gold);
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.rise-sidebar-user-info {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rise-sidebar-user-info p {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rise-sidebar-user-info span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-top: 1px;
+}
+
+/* ---- Main Workspace ---------------------------------------- */
+.rise-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  background: var(--rise-bg);
+}
+
+/* ---- Topbar ------------------------------------------------ */
+.rise-topbar {
+  height: 68px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--rise-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+  z-index: 40;
+}
+
+.rise-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rise-topbar-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-sm);
+  background: #FFFFFF;
+  color: var(--rise-text-secondary);
+  cursor: pointer;
+  transition: var(--rise-transition);
+}
+
+.rise-topbar-toggle:hover {
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+  border-color: var(--rise-primary);
+}
+
+.rise-topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--rise-text-muted);
+}
+
+.rise-topbar-breadcrumb span:first-child {
+  font-weight: 600;
+  color: var(--rise-primary);
+}
+
+.rise-topbar-breadcrumb span:last-child {
+  color: var(--rise-text-primary);
+  font-weight: 600;
+}
+
+.rise-topbar-breadcrumb-sep {
+  color: var(--rise-border-hover);
+}
+
+.rise-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rise-topbar-semester-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background: var(--rise-primary-light);
+  border: 1px solid rgba(7, 69, 92, 0.15);
+  border-radius: var(--rise-radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rise-primary);
+}
+
+.rise-topbar-semester-pill svg {
+  color: var(--rise-gold);
+}
+
+.rise-topbar-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-sm);
+  background: #FFFFFF;
+  color: var(--rise-text-secondary);
+  cursor: pointer;
+  transition: var(--rise-transition);
+  position: relative;
+}
+
+.rise-topbar-icon-btn:hover {
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+  border-color: var(--rise-primary);
+}
+
+.rise-topbar-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 17px;
+  height: 17px;
+  background: var(--rise-danger);
+  border-radius: 50%;
+  font-size: 9.5px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 2px solid #FFFFFF;
+}
+
+/* Notification Dropdown Panel */
+.rise-notification-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 320px;
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  box-shadow: var(--rise-shadow-lg);
+  padding: 14px;
+  z-index: 100;
+  animation: rise-slideUp 0.2s ease-out;
+}
+
+.rise-notification-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rise-border);
+  margin-bottom: 8px;
+}
+
+.rise-notification-header span {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--rise-text-primary);
+}
+
+.rise-notification-header button {
+  background: none;
+  border: none;
+  color: var(--rise-text-muted);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--rise-radius-sm);
+}
+
+.rise-notification-header button:hover {
+  color: var(--rise-text-primary);
+}
+
+.rise-notification-item {
+  padding: 10px;
+  border-radius: var(--rise-radius-md);
+  margin-bottom: 6px;
+  background: #FFFFFF;
+  transition: var(--rise-transition);
+}
+
+.rise-notification-item:hover {
+  background: var(--rise-neutral-light);
+}
+
+.rise-notification-unread {
+  background: var(--rise-primary-light);
+  border-left: 3px solid var(--rise-primary);
+}
+
+.rise-notification-item p {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--rise-text-primary);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+
+.rise-notification-item span {
+  font-size: 11px;
+  color: var(--rise-text-muted);
+}
+
+/* ---- Main Content Scroll Area ------------------------------ */
+.rise-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   2. PAGE HEADER
+   ============================================================ */
+.rise-page-header {
+  margin-bottom: 24px;
+}
+
+.rise-page-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rise-page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--rise-text-primary);
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.rise-page-subtitle {
+  font-size: 13.5px;
+  color: var(--rise-text-secondary);
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.rise-page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ============================================================
+   3. CARDS & SURFACES
+   ============================================================ */
+.rise-card {
+  background: var(--rise-card-bg);
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 20px;
+  box-shadow: var(--rise-shadow-sm);
+  transition: var(--rise-transition);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.rise-card:hover {
+  box-shadow: var(--rise-shadow-md);
+  border-color: var(--rise-border-hover);
+}
+
+.rise-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.rise-card-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.rise-card-title-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--rise-primary);
+}
+
+.rise-card-action {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--rise-primary);
+  cursor: pointer;
+  transition: var(--rise-transition);
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: var(--rise-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.rise-card-action:hover {
+  background: var(--rise-primary-light);
+  color: var(--rise-primary-hover);
+}
+
+.rise-card-action-gold {
+  color: var(--rise-gold-hover);
+}
+
+.rise-card-action-gold:hover {
+  background: var(--rise-gold-light);
+  color: var(--rise-gold);
+}
+
+/* Accent Card variants */
+.rise-card-accent-gold {
+  border-left: 4px solid var(--rise-gold);
+}
+
+.rise-card-accent-teal {
+  border-left: 4px solid var(--rise-primary);
+}
+
+.rise-card-accent-danger {
+  border-left: 4px solid var(--rise-danger);
+}
+
+.rise-card-accent-success {
+  border-left: 4px solid var(--rise-success);
+}
+
+.rise-card-interactive {
+  cursor: pointer;
+}
+
+.rise-card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: var(--rise-primary);
+  box-shadow: var(--rise-shadow-md);
+}
+
+.rise-card-footer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rise-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================================================
+   4. STAT CARDS
+   ============================================================ */
+.rise-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.rise-stat-card {
+  background: var(--rise-card-bg);
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--rise-shadow-sm);
+  transition: var(--rise-transition);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Colored accent bar at top of stat card */
+.rise-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  background: var(--rise-stat-accent, var(--rise-primary));
+  border-radius: var(--rise-radius-lg) var(--rise-radius-lg) 0 0;
+}
+
+.rise-stat-card:hover {
+  box-shadow: var(--rise-shadow-md);
+  transform: translateY(-2px);
+}
+
+.rise-stat-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--rise-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: var(--rise-stat-bg, var(--rise-primary-light));
+  color: var(--rise-stat-accent, var(--rise-primary));
+}
+
+.rise-stat-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--rise-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 4px;
+}
+
+.rise-stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--rise-text-primary);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.rise-stat-sub {
+  font-size: 12px;
+  color: var(--rise-text-secondary);
+  margin-top: 6px;
+}
+
+.rise-stat-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.rise-stat-trend-up {
+  color: var(--rise-success);
+}
+
+.rise-stat-trend-down {
+  color: var(--rise-danger);
+}
+
+/* ============================================================
+   5. BADGES & STATUS TAGS
+   ============================================================ */
+.rise-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--rise-radius-full);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.rise-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Variant Palettes */
+.rise-badge-success {
+  background: var(--rise-success-light);
+  color: var(--rise-success);
+}
+
+.rise-badge-warning {
+  background: var(--rise-warning-light);
+  color: #B45309;
+}
+
+.rise-badge-danger {
+  background: var(--rise-danger-light);
+  color: var(--rise-danger);
+}
+
+.rise-badge-info {
+  background: var(--rise-info-light);
+  color: var(--rise-info);
+}
+
+.rise-badge-neutral {
+  background: var(--rise-neutral-light);
+  color: var(--rise-neutral);
+}
+
+.rise-badge-primary {
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+}
+
+.rise-badge-gold {
+  background: var(--rise-gold-light);
+  color: #8C6F2D;
+  border: 1px solid rgba(206, 174, 101, 0.35);
+}
+
+/* Badge Sizes */
+.rise-badge-sm {
+  padding: 2px 7px;
+  font-size: 10.5px;
+}
+
+.rise-badge-lg {
+  padding: 5px 14px;
+  font-size: 12.5px;
+}
+
+/* Outlined Badges */
+.rise-badge-outline-primary {
+  background: transparent;
+  border: 1px solid var(--rise-primary);
+  color: var(--rise-primary);
+}
+
+.rise-badge-outline-gold {
+  background: transparent;
+  border: 1px solid var(--rise-gold);
+  color: var(--rise-gold-hover);
+}
+
+/* ============================================================
+   6. TABLES
+   ============================================================ */
+.rise-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--rise-radius-md);
+  border: 1px solid var(--rise-border);
+  background: #FFFFFF;
+}
+
+.rise-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  text-align: left;
+}
+
+.rise-table thead {
+  background: var(--rise-bg);
+  border-bottom: 1px solid var(--rise-border);
+}
+
+.rise-table th {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rise-text-muted);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rise-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--rise-border);
+  color: var(--rise-text-primary);
+  vertical-align: middle;
+}
+
+.rise-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rise-table tbody tr:hover td {
+  background: rgba(7, 69, 92, 0.02);
+}
+
+.rise-table-course-name {
+  font-weight: 600;
+  color: var(--rise-text-primary);
+}
+
+.rise-table-course-code {
+  font-size: 11.5px;
+  color: var(--rise-text-muted);
+  margin-top: 2px;
+}
+
+.rise-table-meta {
+  font-size: 12px;
+  color: var(--rise-text-secondary);
+}
+
+.rise-table-dense td,
+.rise-table-dense th {
+  padding: 8px 12px;
+}
+
+/* ============================================================
+   7. GRID LAYOUTS
+   ============================================================ */
+.rise-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.rise-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.rise-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.rise-grid-main-side {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+}
+
+.rise-grid-side-main {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+}
+
+/* Flex helper classes */
+.rise-flex-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rise-flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rise-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================================================
+   8. HERO CARD (TEAL GRADIENT + GOLD ACCENTS)
+   ============================================================ */
+.rise-hero-card {
+  background: linear-gradient(135deg, #07455C 0%, #0A5A77 100%);
+  border-radius: var(--rise-radius-xl);
+  padding: 26px 30px;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--rise-shadow-teal);
+  margin-bottom: 24px;
+  border: 1px solid rgba(206, 174, 101, 0.2);
+}
+
+/* Decorative geometric patterns */
+.rise-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(206, 174, 101, 0.15) 0%, rgba(255, 255, 255, 0.03) 70%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.rise-hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: 120px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Subtle decorative gold dots pattern */
+.rise-hero-dots {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 6px);
+  gap: 8px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.rise-hero-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rise-gold);
+}
+
+.rise-hero-greeting {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--rise-gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rise-hero-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.rise-hero-desc {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 580px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.rise-hero-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.rise-hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 5px 12px;
+  border-radius: var(--rise-radius-full);
+  color: #FFFFFF;
+}
+
+.rise-hero-meta-item svg {
+  color: var(--rise-gold);
+}
+
+/* ============================================================
+   9. PROGRESS BARS
+   ============================================================ */
+.rise-progress-bar {
+  height: 8px;
+  background: var(--rise-border);
+  border-radius: var(--rise-radius-full);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.rise-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rise-primary), #0EA5E9);
+  border-radius: var(--rise-radius-full);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rise-progress-fill-gold {
+  background: linear-gradient(90deg, var(--rise-gold), #E2C783);
+}
+
+.rise-progress-fill-success {
+  background: linear-gradient(90deg, var(--rise-success), #34D399);
+}
+
+.rise-progress-fill-warning {
+  background: linear-gradient(90deg, var(--rise-warning), #FBBF24);
+}
+
+.rise-progress-fill-danger {
+  background: linear-gradient(90deg, var(--rise-danger), #F87171);
+}
+
+.rise-progress-sm {
+  height: 5px;
+}
+
+.rise-progress-lg {
+  height: 12px;
+}
+
+.rise-progress-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--rise-text-secondary);
+  margin-bottom: 6px;
+}
+
+.rise-progress-value {
+  font-weight: 700;
+  color: var(--rise-text-primary);
+}
+
+/* ============================================================
+   10. BUTTONS
+   ============================================================ */
+.rise-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: var(--rise-radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--rise-transition);
+  font-family: inherit;
+  text-decoration: none;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.rise-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Primary Teal Button */
+.rise-btn-primary {
+  background: var(--rise-primary);
+  color: #FFFFFF;
+}
+
+.rise-btn-primary:hover:not(:disabled) {
+  background: var(--rise-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 69, 92, 0.28);
+}
+
+.rise-btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Gold Accent Button */
+.rise-btn-gold {
+  background: var(--rise-gold);
+  color: var(--rise-primary-deep);
+}
+
+.rise-btn-gold:hover:not(:disabled) {
+  background: var(--rise-gold-hover);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(206, 174, 101, 0.35);
+}
+
+.rise-btn-gold:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Outline Buttons */
+.rise-btn-outline {
+  background: #FFFFFF;
+  color: var(--rise-primary);
+  border: 1px solid var(--rise-primary);
+}
+
+.rise-btn-outline:hover:not(:disabled) {
+  background: var(--rise-primary-light);
+  border-color: var(--rise-primary-hover);
+}
+
+.rise-btn-outline-gold {
+  background: transparent;
+  color: #8C6F2D;
+  border: 1px solid var(--rise-gold);
+}
+
+.rise-btn-outline-gold:hover:not(:disabled) {
+  background: var(--rise-gold-light);
+  color: var(--rise-gold-hover);
+}
+
+/* Danger Button */
+.rise-btn-danger {
+  background: var(--rise-danger-light);
+  color: var(--rise-danger);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.rise-btn-danger:hover:not(:disabled) {
+  background: var(--rise-danger);
+  color: #FFFFFF;
+}
+
+/* Ghost & Secondary Buttons */
+.rise-btn-ghost {
+  background: transparent;
+  color: var(--rise-text-secondary);
+}
+
+.rise-btn-ghost:hover:not(:disabled) {
+  background: var(--rise-neutral-light);
+  color: var(--rise-text-primary);
+}
+
+.rise-btn-secondary {
+  background: var(--rise-neutral-light);
+  color: var(--rise-text-primary);
+}
+
+.rise-btn-secondary:hover:not(:disabled) {
+  background: var(--rise-border);
+}
+
+/* Sizes */
+.rise-btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.rise-btn-lg {
+  padding: 12px 24px;
+  font-size: 15px;
+}
+
+.rise-btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--rise-radius-md);
+}
+
+/* ============================================================
+   11. TABS
+   ============================================================ */
+.rise-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--rise-border);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.rise-tab {
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--rise-text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--rise-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.rise-tab:hover {
+  color: var(--rise-primary);
+}
+
+/* Gold active underline */
+.rise-tab.active {
+  color: var(--rise-text-primary);
+  font-weight: 600;
+  border-bottom-color: var(--rise-gold);
+}
+
+.rise-tab.active svg {
+  color: var(--rise-gold);
+}
+
+.rise-tab-badge {
+  padding: 2px 7px;
+  border-radius: var(--rise-radius-full);
+  font-size: 11px;
+  background: var(--rise-neutral-light);
+  color: var(--rise-text-muted);
+}
+
+.rise-tab.active .rise-tab-badge {
+  background: var(--rise-gold-light);
+  color: #8C6F2D;
+}
+
+/* Pill Tabs variant */
+.rise-tabs-pills {
+  border-bottom: none;
+  background: var(--rise-neutral-light);
+  padding: 4px;
+  border-radius: var(--rise-radius-md);
+  display: inline-flex;
+  gap: 4px;
+}
+
+.rise-tab-pill {
+  padding: 7px 14px;
+  border-radius: var(--rise-radius-sm);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--rise-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--rise-transition);
+}
+
+.rise-tab-pill:hover {
+  color: var(--rise-text-primary);
+}
+
+.rise-tab-pill.active {
+  background: #FFFFFF;
+  color: var(--rise-primary);
+  font-weight: 600;
+  box-shadow: var(--rise-shadow-sm);
+}
+
+/* ============================================================
+   12. SEARCH, FILTER & INPUTS
+   ============================================================ */
+.rise-search-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.rise-search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+
+.rise-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--rise-text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.rise-search-input {
+  width: 100%;
+  padding: 9px 12px 9px 38px;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-md);
+  font-size: 13.5px;
+  outline: none;
+  transition: var(--rise-transition);
+  background: #FFFFFF;
+  color: var(--rise-text-primary);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.rise-search-input:focus {
+  border-color: var(--rise-primary);
+  box-shadow: 0 0 0 3px rgba(7, 69, 92, 0.1);
+}
+
+.rise-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rise-filter-select {
+  padding: 9px 14px;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--rise-text-primary);
+  background: #FFFFFF;
+  outline: none;
+  cursor: pointer;
+  transition: var(--rise-transition);
+  font-family: inherit;
+}
+
+.rise-filter-select:focus {
+  border-color: var(--rise-primary);
+  box-shadow: 0 0 0 3px rgba(7, 69, 92, 0.1);
+}
+
+/* ============================================================
+   13. ASSIGNMENTS SPECIFIC
+   ============================================================ */
+.rise-assignment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rise-assignment-item {
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 16px 18px;
+  transition: var(--rise-transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-decoration: none;
+}
+
+.rise-assignment-item:hover {
+  border-color: var(--rise-primary);
+  box-shadow: var(--rise-shadow-md);
+  transform: translateY(-1px);
+}
+
+.rise-assignment-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.rise-assignment-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--rise-neutral);
+}
+
+.rise-assignment-status-dot.pending {
+  background: var(--rise-warning);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.rise-assignment-status-dot.submitted {
+  background: var(--rise-info);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.rise-assignment-status-dot.graded {
+  background: var(--rise-success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.rise-assignment-status-dot.overdue {
+  background: var(--rise-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.rise-assignment-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  margin: 0 0 4px;
+}
+
+.rise-assignment-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--rise-text-muted);
+}
+
+.rise-assignment-course {
+  font-weight: 600;
+  color: var(--rise-primary);
+}
+
+.rise-assignment-due {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rise-assignment-grade {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--rise-success);
+}
+
+/* ============================================================
+   14. SCHEDULE SPECIFIC
+   ============================================================ */
+.rise-schedule-day-column {
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--rise-shadow-sm);
+}
+
+.rise-schedule-day-header {
+  padding: 14px 16px;
+  background: var(--rise-primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rise-schedule-day-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.rise-schedule-day-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: rgba(206, 174, 101, 0.25);
+  color: var(--rise-gold);
+  border-radius: var(--rise-radius-full);
+  font-weight: 600;
+}
+
+.rise-schedule-slots {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rise-schedule-slot {
+  border-left: 3.5px solid var(--rise-primary);
+  background: var(--rise-bg);
+  border-radius: 0 var(--rise-radius-md) var(--rise-radius-md) 0;
+  padding: 12px 14px;
+  transition: var(--rise-transition);
+}
+
+.rise-schedule-slot:hover {
+  background: var(--rise-primary-light);
+  transform: translateX(2px);
+}
+
+.rise-schedule-slot.rise-schedule-current {
+  border-left-color: var(--rise-gold);
+  background: var(--rise-gold-light);
+}
+
+.rise-schedule-time {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--rise-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.rise-schedule-slot.rise-schedule-current .rise-schedule-time {
+  color: #8C6F2D;
+}
+
+.rise-schedule-course-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  margin-bottom: 4px;
+}
+
+.rise-schedule-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--rise-text-secondary);
+}
+
+.rise-schedule-room {
+  background: #FFFFFF;
+  padding: 2px 7px;
+  border-radius: var(--rise-radius-sm);
+  border: 1px solid var(--rise-border);
+  font-weight: 600;
+}
+
+/* ============================================================
+   15. ATTENDANCE SPECIFIC
+   ============================================================ */
+.rise-attendance-card {
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 18px;
+  box-shadow: var(--rise-shadow-sm);
+}
+
+.rise-attendance-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.rise-attendance-bar {
+  display: flex;
+  height: 10px;
+  border-radius: var(--rise-radius-full);
+  overflow: hidden;
+  background: var(--rise-border);
+  gap: 2px;
+}
+
+.rise-attendance-segment {
+  height: 100%;
+}
+
+.rise-attendance-segment-present {
+  background: var(--rise-success);
+}
+
+.rise-attendance-segment-sick {
+  background: var(--rise-warning);
+}
+
+.rise-attendance-segment-excused {
+  background: var(--rise-info);
+}
+
+.rise-attendance-segment-absent {
+  background: var(--rise-danger);
+}
+
+.rise-attendance-dots-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.rise-attendance-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--rise-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #FFFFFF;
+  cursor: default;
+}
+
+.rise-attendance-dot-h { background: var(--rise-success); }
+.rise-attendance-dot-s { background: var(--rise-warning); }
+.rise-attendance-dot-i { background: var(--rise-info); }
+.rise-attendance-dot-a { background: var(--rise-danger); }
+.rise-attendance-dot-future { background: var(--rise-border); color: var(--rise-text-muted); }
+
+/* ============================================================
+   16. LEARNING MATERIALS SPECIFIC
+   ============================================================ */
+.rise-material-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.rise-material-item {
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: var(--rise-transition);
+}
+
+.rise-material-item:hover {
+  border-color: var(--rise-primary);
+  box-shadow: var(--rise-shadow-md);
+  transform: translateY(-2px);
+}
+
+.rise-material-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--rise-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+}
+
+.rise-material-icon-pdf   { background: #FEE2E2; color: #DC2626; }
+.rise-material-icon-video { background: #FEF3C7; color: #D97706; }
+.rise-material-icon-slide { background: #E0E7FF; color: #4F46E5; }
+.rise-material-icon-code  { background: #DCFCE7; color: #16A34A; }
+
+.rise-material-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rise-material-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rise-material-meta {
+  font-size: 11.5px;
+  color: var(--rise-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rise-material-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--rise-radius-sm);
+  background: var(--rise-neutral-light);
+  color: var(--rise-text-secondary);
+}
+
+.rise-material-download-btn {
+  background: transparent;
+  border: none;
+  color: var(--rise-text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--rise-radius-sm);
+  transition: var(--rise-transition);
+}
+
+.rise-material-download-btn:hover {
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+}
+
+/* ============================================================
+   17. GROUP WORKSPACE SPECIFIC
+   ============================================================ */
+.rise-group-card {
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 20px;
+  box-shadow: var(--rise-shadow-sm);
+  transition: var(--rise-transition);
+}
+
+.rise-group-card:hover {
+  border-color: var(--rise-border-hover);
+  box-shadow: var(--rise-shadow-md);
+}
+
+.rise-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.rise-group-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rise-text-primary);
+  margin: 0;
+}
+
+/* Member Avatars Stack */
+.rise-member-avatars-stack {
+  display: flex;
+  align-items: center;
+}
+
+.rise-member-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  background: var(--rise-primary);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -8px;
+  box-shadow: var(--rise-shadow-sm);
+}
+
+.rise-member-avatar:first-child {
+  margin-left: 0;
+}
+
+.rise-member-avatar-lead {
+  border-color: var(--rise-gold);
+}
+
+/* Task Item in Group Workspace */
+.rise-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rise-task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--rise-radius-md);
+  background: var(--rise-bg);
+  border: 1px solid var(--rise-border);
+  transition: var(--rise-transition);
+}
+
+.rise-task-item:hover {
+  background: #FFFFFF;
+  border-color: var(--rise-border-hover);
+}
+
+.rise-task-item.done {
+  opacity: 0.65;
+  text-decoration: line-through;
+}
+
+.rise-task-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rise-task-checkbox {
+  width: 17px;
+  height: 17px;
+  border-radius: 4px;
+  border: 1.5px solid var(--rise-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--rise-transition);
+}
+
+.rise-task-checkbox.checked {
+  background: var(--rise-primary);
+  border-color: var(--rise-primary);
+  color: #FFFFFF;
+}
+
+.rise-task-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--rise-text-primary);
+}
+
+/* Activity stream item */
+.rise-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rise-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 12.5px;
+}
+
+.rise-activity-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.rise-activity-content {
+  flex: 1;
+}
+
+.rise-activity-content strong {
+  color: var(--rise-text-primary);
+}
+
+.rise-activity-time {
+  font-size: 11px;
+  color: var(--rise-text-muted);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   18. UPLOAD AREA
+   ============================================================ */
+.rise-upload-area {
+  border: 2px dashed var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--rise-bg);
+  cursor: pointer;
+  transition: var(--rise-transition);
+  position: relative;
+}
+
+.rise-upload-area:hover,
+.rise-upload-area.dragover {
+  border-color: var(--rise-primary);
+  background: var(--rise-primary-light);
+}
+
+.rise-upload-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rise-primary);
+  box-shadow: var(--rise-shadow-sm);
+}
+
+.rise-upload-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  margin: 0 0 4px;
+}
+
+.rise-upload-subtitle {
+  font-size: 12px;
+  color: var(--rise-text-muted);
+  margin: 0;
+}
+
+/* ============================================================
+   19. TOAST NOTIFICATIONS
+   ============================================================ */
+.rise-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.rise-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: var(--rise-radius-md);
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  box-shadow: var(--rise-shadow-lg);
+  min-width: 280px;
+  max-width: 400px;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rise-toast.rise-toast-show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.rise-toast-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.rise-toast-success .rise-toast-icon { color: var(--rise-success); }
+.rise-toast-warning .rise-toast-icon { color: var(--rise-warning); }
+.rise-toast-danger  .rise-toast-icon { color: var(--rise-danger); }
+.rise-toast-info    .rise-toast-icon { color: var(--rise-info); }
+
+.rise-toast-text {
+  flex: 1;
+  font-size: 13px;
+  color: var(--rise-text-primary);
+  font-weight: 500;
+}
+
+.rise-toast-close {
+  background: none;
+  border: none;
+  color: var(--rise-text-muted);
+  cursor: pointer;
+  padding: 2px;
+}
+
+/* ============================================================
+   20. MODAL & OVERLAYS
+   ============================================================ */
+.rise-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 47, 61, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: rise-fadeIn 0.2s ease-out;
+}
+
+.rise-modal {
+  background: #FFFFFF;
+  border-radius: var(--rise-radius-xl);
+  box-shadow: var(--rise-shadow-lg);
+  max-width: 520px;
+  width: 100%;
+  overflow: hidden;
+  animation: rise-slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--rise-border);
+}
+
+.rise-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--rise-border);
+}
+
+.rise-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--rise-text-primary);
+  margin: 0;
+}
+
+.rise-modal-close {
+  background: none;
+  border: none;
+  color: var(--rise-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--rise-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--rise-transition);
+}
+
+.rise-modal-close:hover {
+  background: var(--rise-neutral-light);
+  color: var(--rise-text-primary);
+}
+
+.rise-modal-body {
+  padding: 20px 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.rise-modal-footer {
+  padding: 16px 24px;
+  background: var(--rise-bg);
+  border-top: 1px solid var(--rise-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ============================================================
+   21. EMPTY STATE
+   ============================================================ */
+.rise-empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--rise-text-muted);
+}
+
+.rise-empty-state-icon {
+  margin: 0 auto 16px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.rise-empty-state-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  margin: 0 0 6px;
+}
+
+.rise-empty-state-message {
+  font-size: 13px;
+  color: var(--rise-text-secondary);
+  max-width: 380px;
+  margin: 0 auto 18px;
+  line-height: 1.5;
+}
+
+.rise-empty-state-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ============================================================
+   22. INFO ROWS
+   ============================================================ */
+.rise-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rise-border);
+  font-size: 13.5px;
+}
+
+.rise-info-row:last-child {
+  border-bottom: none;
+}
+
+.rise-info-row-label {
+  color: var(--rise-text-secondary);
+  font-weight: 500;
+}
+
+.rise-info-row-value {
+  font-weight: 600;
+  color: var(--rise-text-primary);
+  text-align: right;
+}
+
+/* ============================================================
+   23. DISCUSSION FORUM AREA
+   ============================================================ */
+.rise-discussion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rise-discussion-item {
+  background: #FFFFFF;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-lg);
+  padding: 18px;
+  transition: var(--rise-transition);
+}
+
+.rise-discussion-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rise-discussion-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--rise-primary-light);
+  color: var(--rise-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.rise-discussion-author {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--rise-text-primary);
+}
+
+.rise-discussion-role {
+  font-size: 11px;
+  color: var(--rise-gold-hover);
+  font-weight: 600;
+}
+
+.rise-discussion-time {
+  font-size: 11px;
+  color: var(--rise-text-muted);
+  margin-left: auto;
+}
+
+.rise-discussion-content {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--rise-text-secondary);
+  margin-bottom: 12px;
+}
+
+.rise-discussion-reply-btn {
+  background: none;
+  border: none;
+  color: var(--rise-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rise-discussion-reply-btn:hover {
+  text-decoration: underline;
+}
+
+.rise-discussion-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--rise-border);
+  border-radius: var(--rise-radius-md);
+  font-size: 13.5px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: var(--rise-transition);
+  box-sizing: border-box;
+}
+
+.rise-discussion-input:focus {
+  border-color: var(--rise-primary);
+  box-shadow: 0 0 0 3px rgba(7, 69, 92, 0.1);
+}
+
+/* ============================================================
+   24. UTILITIES & MISCELLANEOUS
+   ============================================================ */
+.rise-divider {
+  height: 1px;
+  background: var(--rise-border);
+  margin: 18px 0;
+}
+
+.rise-section {
+  margin-bottom: 24px;
+}
+
+.rise-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rise-text-primary);
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rise-section-title svg {
+  color: var(--rise-primary);
+}
+
+/* ============================================================
+   25. CUSTOM SCROLLBARS
+   ============================================================ */
+.rise-content::-webkit-scrollbar,
+.rise-sidebar::-webkit-scrollbar,
+.rise-modal-body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.rise-content::-webkit-scrollbar-track,
+.rise-modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rise-sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.rise-content::-webkit-scrollbar-thumb,
+.rise-modal-body::-webkit-scrollbar-thumb {
+  background: var(--rise-border);
+  border-radius: var(--rise-radius-full);
+}
+
+.rise-content::-webkit-scrollbar-thumb:hover {
+  background: var(--rise-border-hover);
+}
+
+.rise-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: var(--rise-radius-full);
+}
+
+.rise-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(206, 174, 101, 0.4);
+}
+
+/* Firefox scrollbar support */
+.rise-content,
+.rise-modal-body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rise-border) transparent;
+}
+
+.rise-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+/* ============================================================
+   26. ANIMATIONS
+   ============================================================ */
+@keyframes rise-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(7, 69, 92, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(7, 69, 92, 0.06);
+  }
+}
+
+@keyframes rise-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ============================================================
+   27. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1100px) {
+  .rise-grid-main-side,
+  .rise-grid-side-main {
+    grid-template-columns: 1fr;
+  }
+
+  .rise-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rise-stat-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .rise-mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 47, 61, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 150;
+  }
+
+  .rise-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    z-index: 200;
+    box-shadow: var(--rise-shadow-lg);
+  }
+
+  .rise-sidebar.rise-sidebar-open {
+    transform: translateX(0);
+  }
+
+  .rise-topbar {
+    padding: 0 16px;
+  }
+
+  .rise-content {
+    padding: 16px;
+  }
+
+  .rise-grid-2,
+  .rise-grid-3,
+  .rise-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .rise-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rise-hero-card {
+    padding: 20px;
+  }
+
+  .rise-hero-name {
+    font-size: 19px;
+  }
+
+  .rise-search-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .rise-search-wrapper {
+    min-width: 100%;
+  }
+
+  .rise-filter-group {
+    width: 100%;
+  }
+
+  .rise-filter-select {
+    flex: 1;
+  }
+
+  .rise-topbar-semester-pill {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .rise-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rise-assignment-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rise-modal {
+    max-width: 95vw;
+  }
+}
