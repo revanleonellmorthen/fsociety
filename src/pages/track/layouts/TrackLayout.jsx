@@ -3,7 +3,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, BookOpen, FileText, GraduationCap,
   CreditCard, UserCheck, Route, Bell, Menu, X,
-  ChevronRight, Calendar, User,
+  ChevronLeft, ChevronRight, Calendar, User, Home,
 } from 'lucide-react';
 import { student } from '../data/mockData';
 import '../styles/track.css';
@@ -129,6 +129,7 @@ export default function TrackLayout() {
         {/* Top bar */}
         <header className="track-topbar">
           <div className="track-topbar-left">
+            {/* Sidebar toggle */}
             <button
               className="track-topbar-toggle"
               onClick={() => {
@@ -143,6 +144,7 @@ export default function TrackLayout() {
               {mobileOpen ? <X size={16} /> : <Menu size={16} />}
             </button>
 
+            {/* Breadcrumb */}
             <div className="track-topbar-breadcrumb">
               <span>TRACK</span>
               <ChevronRight size={12} className="track-topbar-breadcrumb-sep" />
@@ -151,6 +153,20 @@ export default function TrackLayout() {
           </div>
 
           <div className="track-topbar-right">
+            {/* Back to Home button */}
+            <button
+              type="button"
+              className="track-topbar-home-btn"
+              onClick={() => {
+                window.history.pushState({}, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              title="Kembali ke Dashboard Home"
+            >
+              <Home size={14} />
+              <span>Home</span>
+            </button>
+
             <div className="track-topbar-semester-pill">
               <Calendar size={12} />
               Semester {student.activeSemester} · {student.activeAcademicYear}

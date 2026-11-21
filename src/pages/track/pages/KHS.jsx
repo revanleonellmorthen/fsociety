@@ -15,7 +15,7 @@ const gradeVariant = (grade) => {
 
 const gradeColors = {
   A: '#10B981', 'A-': '#10B981',
-  'B+': '#2563EB', B: '#2563EB', 'B-': '#6366F1',
+  'B+': '#07455C', B: '#07455C', 'B-': '#6366F1',
   'C+': '#F59E0B', C: '#F59E0B',
   D: '#EF4444', E: '#7F1D1D',
 };

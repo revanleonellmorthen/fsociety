@@ -13,8 +13,8 @@ import { student, overviewStats, announcements, khs, billingData } from '../data
 
 const statConfig = {
   success: { color: '#10B981', bg: '#ECFDF5' },
-  primary: { color: '#2563EB', bg: '#EFF6FF' },
-  accent:  { color: '#0EA5E9', bg: '#E0F2FE' },
+  primary: { color: '#07455C', bg: '#F1F5F4' },
+  accent:  { color: '#CEAE65', bg: '#FAF5E8' },
   info:    { color: '#6366F1', bg: '#EEF2FF' },
   warning: { color: '#F59E0B', bg: '#FFFBEB' },
   danger:  { color: '#EF4444', bg: '#FEF2F2' },
@@ -30,10 +30,10 @@ const statIcons = {
 };
 
 const quickLinks = [
-  { to: '/krs',              label: 'KRS',                icon: <BookOpen size={20} />,      color: '#2563EB', bg: '#EFF6FF' },
+  { to: '/krs',              label: 'KRS',                icon: <BookOpen size={20} />,      color: '#07455C', bg: '#F1F5F4' },
   { to: '/khs',              label: 'KHS',                icon: <FileText size={20} />,      color: '#10B981', bg: '#ECFDF5' },
   { to: '/academic-journey', label: 'Perjalanan Akademik',icon: <Route size={20} />,         color: '#6366F1', bg: '#EEF2FF' },
-  { to: '/academic-records', label: 'Riwayat Akademik',  icon: <GraduationCap size={20} />, color: '#0EA5E9', bg: '#E0F2FE' },
+  { to: '/academic-records', label: 'Riwayat Akademik',  icon: <GraduationCap size={20} />, color: '#CEAE65', bg: '#FAF5E8' },
   { to: '/billing',          label: 'Tagihan',            icon: <CreditCard size={20} />,    color: '#F59E0B', bg: '#FFFBEB' },
   { to: '/admissions',       label: 'Penerimaan',         icon: <UserCheck size={20} />,     color: '#EF4444', bg: '#FEF2F2' },
 ];
