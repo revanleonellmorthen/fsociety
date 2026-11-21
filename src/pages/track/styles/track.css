@@ -1,0 +1,1448 @@
+/* ============================================================
+   TRACK MODULE — Isolated Styles
+   All selectors prefixed with .track- to prevent leaking into
+   Home or RISE modules.
+   CSS variables use --track-* namespace with fallbacks to
+   shared Cakrawala design tokens.
+   DO NOT modify :root, body, html, or any global selectors.
+   ============================================================ */
+
+/* ---- Design Tokens (TRACK-scoped) ------------------------- */
+.track-container {
+  --track-primary:        #2563EB;
+  --track-primary-light:  #EFF6FF;
+  --track-primary-hover:  #1D4ED8;
+  --track-accent:         #0EA5E9;
+  --track-accent-light:   #E0F2FE;
+  --track-bg:             #F8FAFC;
+  --track-bg-sidebar:     #FFFFFF;
+  --track-card-bg:        #FFFFFF;
+  --track-border:         #E2E8F0;
+  --track-border-hover:   #CBD5E1;
+  --track-text-primary:   #0F172A;
+  --track-text-secondary: #64748B;
+  --track-text-muted:     #94A3B8;
+  --track-success:        #10B981;
+  --track-success-light:  #ECFDF5;
+  --track-warning:        #F59E0B;
+  --track-warning-light:  #FFFBEB;
+  --track-danger:         #EF4444;
+  --track-danger-light:   #FEF2F2;
+  --track-info:           #6366F1;
+  --track-info-light:     #EEF2FF;
+  --track-neutral:        #64748B;
+  --track-neutral-light:  #F1F5F9;
+  --track-radius-sm:      6px;
+  --track-radius-md:      10px;
+  --track-radius-lg:      14px;
+  --track-radius-xl:      20px;
+  --track-shadow-sm:      0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --track-shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --track-shadow-lg:      0 10px 30px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.04);
+  --track-transition:     all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --track-sidebar-width:  248px;
+
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--track-bg);
+  color: var(--track-text-primary);
+}
+
+/* ---- Layout ------------------------------------------------ */
+.track-sidebar {
+  width: var(--track-sidebar-width);
+  min-width: var(--track-sidebar-width);
+  background: var(--track-bg-sidebar);
+  border-right: 1px solid var(--track-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: var(--track-transition);
+  z-index: 100;
+}
+
+.track-sidebar-collapsed {
+  width: 68px;
+  min-width: 68px;
+}
+
+.track-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--track-border);
+  min-height: 68px;
+}
+
+.track-sidebar-brand-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--track-primary), var(--track-accent));
+  border-radius: var(--track-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.track-sidebar-brand-icon svg {
+  color: white;
+}
+
+.track-sidebar-brand-text {
+  overflow: hidden;
+}
+
+.track-sidebar-brand-text h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--track-text-primary);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.track-sidebar-brand-text span {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--track-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.track-sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.track-nav-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--track-text-muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 10px 8px 4px;
+}
+
+.track-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--track-radius-md);
+  color: var(--track-text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: var(--track-transition);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+}
+
+.track-nav-link:hover {
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+}
+
+.track-nav-link.active {
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+  font-weight: 600;
+}
+
+.track-nav-link.active svg {
+  color: var(--track-primary);
+}
+
+.track-nav-link svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.track-nav-link-label {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.track-sidebar-footer {
+  padding: 12px 10px;
+  border-top: 1px solid var(--track-border);
+}
+
+.track-sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--track-radius-md);
+  background: var(--track-neutral-light);
+}
+
+.track-sidebar-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--track-primary), var(--track-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.track-sidebar-user-info {
+  overflow: hidden;
+}
+
+.track-sidebar-user-info p {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--track-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-sidebar-user-info span {
+  font-size: 11px;
+  color: var(--track-text-muted);
+}
+
+.track-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.track-topbar {
+  height: 68px;
+  background: white;
+  border-bottom: 1px solid var(--track-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+.track-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.track-topbar-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-sm);
+  background: none;
+  color: var(--track-text-secondary);
+  cursor: pointer;
+  transition: var(--track-transition);
+}
+
+.track-topbar-toggle:hover {
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+  border-color: var(--track-primary);
+}
+
+.track-topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--track-text-muted);
+}
+
+.track-topbar-breadcrumb span:last-child {
+  color: var(--track-text-primary);
+  font-weight: 600;
+}
+
+.track-topbar-breadcrumb-sep {
+  color: var(--track-border);
+}
+
+.track-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track-topbar-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-sm);
+  background: none;
+  color: var(--track-text-secondary);
+  cursor: pointer;
+  transition: var(--track-transition);
+  position: relative;
+}
+
+.track-topbar-icon-btn:hover {
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+  border-color: var(--track-primary);
+}
+
+.track-topbar-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  background: var(--track-danger);
+  border-radius: 50%;
+  font-size: 9px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.track-topbar-semester-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--track-primary-light);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--track-primary);
+}
+
+.track-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  scroll-behavior: smooth;
+}
+
+/* ---- Page Header ------------------------------------------- */
+.track-page-header {
+  margin-bottom: 24px;
+}
+
+.track-page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--track-text-primary);
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.track-page-subtitle {
+  font-size: 13.5px;
+  color: var(--track-text-secondary);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ---- Cards ------------------------------------------------- */
+.track-card {
+  background: var(--track-card-bg);
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-lg);
+  padding: 20px;
+  box-shadow: var(--track-shadow-sm);
+  transition: var(--track-transition);
+}
+
+.track-card:hover {
+  box-shadow: var(--track-shadow-md);
+  border-color: var(--track-border-hover);
+}
+
+.track-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.track-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--track-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-card-title svg {
+  color: var(--track-primary);
+}
+
+.track-card-action {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--track-primary);
+  cursor: pointer;
+  transition: var(--track-transition);
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  border-radius: var(--track-radius-sm);
+}
+
+.track-card-action:hover {
+  background: var(--track-primary-light);
+}
+
+/* ---- Stat Cards -------------------------------------------- */
+.track-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.track-stat-card {
+  background: var(--track-card-bg);
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--track-shadow-sm);
+  transition: var(--track-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.track-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--track-stat-accent, var(--track-primary));
+  border-radius: var(--track-radius-lg) var(--track-radius-lg) 0 0;
+}
+
+.track-stat-card:hover {
+  box-shadow: var(--track-shadow-md);
+  transform: translateY(-1px);
+}
+
+.track-stat-card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--track-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: var(--track-stat-bg, var(--track-primary-light));
+  color: var(--track-stat-accent, var(--track-primary));
+}
+
+.track-stat-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--track-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.track-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--track-text-primary);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.track-stat-sub {
+  font-size: 11.5px;
+  color: var(--track-text-muted);
+  margin-top: 4px;
+}
+
+/* ---- Status Badge ------------------------------------------ */
+.track-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.track-badge-success {
+  background: var(--track-success-light);
+  color: var(--track-success);
+}
+
+.track-badge-warning {
+  background: var(--track-warning-light);
+  color: #B45309;
+}
+
+.track-badge-danger {
+  background: var(--track-danger-light);
+  color: var(--track-danger);
+}
+
+.track-badge-info {
+  background: var(--track-info-light);
+  color: var(--track-info);
+}
+
+.track-badge-neutral {
+  background: var(--track-neutral-light);
+  color: var(--track-neutral);
+}
+
+.track-badge-primary {
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+}
+
+/* ---- Table ------------------------------------------------- */
+.track-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--track-radius-md);
+  border: 1px solid var(--track-border);
+}
+
+.track-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.track-table thead {
+  background: var(--track-bg);
+  border-bottom: 1px solid var(--track-border);
+}
+
+.track-table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--track-text-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.track-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--track-border);
+  color: var(--track-text-primary);
+  vertical-align: middle;
+}
+
+.track-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.track-table tbody tr:hover td {
+  background: var(--track-bg);
+}
+
+.track-table-course-name {
+  font-weight: 600;
+  color: var(--track-text-primary);
+}
+
+.track-table-course-code {
+  font-size: 11.5px;
+  color: var(--track-text-muted);
+  margin-top: 2px;
+}
+
+/* ---- Grid Layouts ------------------------------------------ */
+.track-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.track-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.track-grid-main-side {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+}
+
+/* ---- Section spacing --------------------------------------- */
+.track-section {
+  margin-bottom: 24px;
+}
+
+.track-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--track-text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- Hero Card --------------------------------------------- */
+.track-hero-card {
+  background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%);
+  border-radius: var(--track-radius-xl);
+  padding: 24px 28px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+  margin-bottom: 24px;
+}
+
+.track-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+
+.track-hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: 60px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+
+.track-hero-greeting {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.track-hero-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+}
+
+.track-hero-meta {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.track-hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ---- Quick Access ------------------------------------------ */
+.track-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.track-quick-item {
+  background: var(--track-card-bg);
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-lg);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--track-transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.track-quick-item:hover {
+  border-color: var(--track-primary);
+  background: var(--track-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--track-shadow-md);
+}
+
+.track-quick-item-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--track-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--track-quick-bg, var(--track-primary-light));
+  color: var(--track-quick-color, var(--track-primary));
+}
+
+.track-quick-item-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--track-text-secondary);
+}
+
+/* ---- Announcement ------------------------------------------ */
+.track-announcement-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--track-border);
+}
+
+.track-announcement-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.track-announcement-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--track-primary);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.track-announcement-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--track-text-primary);
+  margin-bottom: 2px;
+}
+
+.track-announcement-date {
+  font-size: 11.5px;
+  color: var(--track-text-muted);
+}
+
+.track-announcement-desc {
+  font-size: 12.5px;
+  color: var(--track-text-secondary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ---- KRS --------------------------------------------------- */
+.track-krs-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+  align-items: start;
+}
+
+.track-krs-sks-meter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.track-krs-sks-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--track-text-secondary);
+}
+
+.track-krs-sks-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--track-primary);
+}
+
+.track-krs-sks-max {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--track-text-muted);
+}
+
+.track-progress-bar {
+  height: 8px;
+  background: var(--track-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.track-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--track-primary), var(--track-accent));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.track-progress-fill-warning {
+  background: linear-gradient(90deg, var(--track-warning), #FBBF24);
+}
+
+.track-progress-fill-danger {
+  background: linear-gradient(90deg, var(--track-danger), #F97316);
+}
+
+.track-course-search {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-md);
+  font-size: 13.5px;
+  outline: none;
+  transition: var(--track-transition);
+  background: white;
+  color: var(--track-text-primary);
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+
+.track-course-search:focus {
+  border-color: var(--track-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.track-course-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-md);
+  margin-bottom: 8px;
+  transition: var(--track-transition);
+  background: white;
+}
+
+.track-course-row:hover {
+  border-color: var(--track-primary);
+  background: var(--track-primary-light);
+}
+
+.track-course-row-selected {
+  border-color: var(--track-success);
+  background: var(--track-success-light);
+}
+
+.track-course-row-info {
+  flex: 1;
+}
+
+.track-course-row-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--track-text-primary);
+}
+
+.track-course-row-meta {
+  font-size: 11.5px;
+  color: var(--track-text-muted);
+  margin-top: 2px;
+}
+
+.track-course-row-sks {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--track-primary);
+  background: var(--track-primary-light);
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+
+.track-course-row-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--track-transition);
+  flex-shrink: 0;
+}
+
+.track-course-row-btn-add {
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+}
+
+.track-course-row-btn-add:hover {
+  background: var(--track-primary);
+  color: white;
+}
+
+.track-course-row-btn-remove {
+  background: var(--track-danger-light);
+  color: var(--track-danger);
+}
+
+.track-course-row-btn-remove:hover {
+  background: var(--track-danger);
+  color: white;
+}
+
+/* ---- KHS Chart --------------------------------------------- */
+.track-semester-select {
+  padding: 8px 14px;
+  border: 1px solid var(--track-border);
+  border-radius: var(--track-radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--track-text-primary);
+  background: white;
+  outline: none;
+  cursor: pointer;
+  transition: var(--track-transition);
+  font-family: inherit;
+}
+
+.track-semester-select:focus {
+  border-color: var(--track-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.track-grade-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 100px;
+  padding: 10px 0;
+}
+
+.track-grade-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 4px;
+}
+
+.track-grade-bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease;
+}
+
+.track-grade-bar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--track-text-muted);
+}
+
+.track-grade-bar-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--track-text-primary);
+}
+
+.track-ipk-display {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.track-ipk-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--track-primary);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.track-ipk-max {
+  font-size: 16px;
+  color: var(--track-text-muted);
+  font-weight: 500;
+}
+
+/* ---- Academic Journey -------------------------------------- */
+.track-journey-active {
+  background: linear-gradient(135deg, #EFF6FF 0%, #E0F2FE 100%);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--track-radius-xl);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.track-journey-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.track-journey-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--track-primary);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.track-journey-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--track-text-primary);
+  letter-spacing: -0.5px;
+}
+
+.track-journey-subtitle {
+  font-size: 13px;
+  color: var(--track-text-secondary);
+  margin-top: 2px;
+}
+
+.track-journey-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.track-journey-stat {
+  background: white;
+  border-radius: var(--track-radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--track-shadow-sm);
+}
+
+.track-journey-stat-label {
+  font-size: 11px;
+  color: var(--track-text-muted);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.track-journey-stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--track-text-primary);
+  letter-spacing: -0.3px;
+}
+
+.track-journey-stat-unit {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--track-text-secondary);
+  margin-left: 2px;
+}
+
+.track-journey-progress-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--track-text-secondary);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.track-history-item {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--track-border);
+}
+
+.track-history-item:last-child {
+  border-bottom: none;
+}
+
+.track-history-sem-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--track-radius-md);
+  background: var(--track-primary-light);
+  color: var(--track-primary);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.track-history-info {
+  flex: 1;
+}
+
+.track-history-info h4 {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--track-text-primary);
+}
+
+.track-history-info p {
+  font-size: 12px;
+  color: var(--track-text-secondary);
+  margin-top: 2px;
+}
+
+.track-history-ipk {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--track-primary);
+  text-align: right;
+}
+
+.track-history-ipk-label {
+  font-size: 11px;
+  color: var(--track-text-muted);
+  text-align: right;
+}
+
+/* ---- Billing ----------------------------------------------- */
+.track-billing-hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  border-radius: var(--track-radius-xl);
+  padding: 24px 28px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.track-billing-amount {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.track-billing-amount-label {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.track-billing-due {
+  font-size: 12.5px;
+  opacity: 0.75;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.track-billing-status-paid {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34D399;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- Admissions -------------------------------------------- */
+.track-timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.track-timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--track-border);
+}
+
+.track-timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.track-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.track-timeline-dot {
+  position: absolute;
+  left: -21px;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--track-border);
+  border: 2px solid white;
+  box-shadow: 0 0 0 1px var(--track-border);
+}
+
+.track-timeline-dot-done {
+  background: var(--track-success);
+  box-shadow: 0 0 0 1px var(--track-success);
+}
+
+.track-timeline-dot-active {
+  background: var(--track-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  animation: track-pulse 2s infinite;
+}
+
+@keyframes track-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+  50%       { box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.08); }
+}
+
+.track-timeline-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--track-text-primary);
+}
+
+.track-timeline-date {
+  font-size: 11.5px;
+  color: var(--track-text-muted);
+  margin-top: 1px;
+}
+
+.track-doc-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.track-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--track-bg);
+  border-radius: var(--track-radius-md);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--track-text-primary);
+}
+
+.track-doc-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.track-doc-check-done {
+  background: var(--track-success);
+  color: white;
+}
+
+.track-doc-check-pending {
+  background: var(--track-warning-light);
+  color: var(--track-warning);
+}
+
+/* ---- Utility / Misc ---------------------------------------- */
+.track-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--track-text-muted);
+}
+
+.track-empty-state svg {
+  margin: 0 auto 12px;
+  opacity: 0.4;
+}
+
+.track-empty-state p {
+  font-size: 14px;
+}
+
+.track-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: var(--track-radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--track-transition);
+  font-family: inherit;
+}
+
+.track-btn-primary {
+  background: var(--track-primary);
+  color: white;
+}
+
+.track-btn-primary:hover {
+  background: var(--track-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.track-btn-outline {
+  background: white;
+  color: var(--track-primary);
+  border: 1px solid var(--track-primary);
+}
+
+.track-btn-outline:hover {
+  background: var(--track-primary-light);
+}
+
+.track-btn-danger {
+  background: var(--track-danger-light);
+  color: var(--track-danger);
+}
+
+.track-btn-danger:hover {
+  background: var(--track-danger);
+  color: white;
+}
+
+.track-divider {
+  height: 1px;
+  background: var(--track-border);
+  margin: 16px 0;
+}
+
+.track-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--track-border);
+  font-size: 13.5px;
+}
+
+.track-info-row:last-child {
+  border-bottom: none;
+}
+
+.track-info-row-label {
+  color: var(--track-text-secondary);
+  font-weight: 500;
+}
+
+.track-info-row-value {
+  font-weight: 600;
+  color: var(--track-text-primary);
+}
+
+/* ---- Scrollbar styling ------------------------------------- */
+.track-content::-webkit-scrollbar,
+.track-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.track-content::-webkit-scrollbar-thumb,
+.track-sidebar::-webkit-scrollbar-thumb {
+  background: var(--track-border);
+  border-radius: 4px;
+}
+
+/* ---- Responsive -------------------------------------------- */
+@media (max-width: 1100px) {
+  .track-krs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .track-grid-main-side {
+    grid-template-columns: 1fr;
+  }
+
+  .track-journey-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .track-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    z-index: 200;
+  }
+
+  .track-sidebar-open {
+    transform: translateX(0);
+    box-shadow: var(--track-shadow-lg);
+  }
+
+  .track-content {
+    padding: 16px;
+  }
+
+  .track-grid-2,
+  .track-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .track-journey-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .track-billing-hero {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .track-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
