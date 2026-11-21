@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * RISE Module — Student Profile Data
  * Consistent with TRACK module profile:
@@ -26,3 +27,17 @@ export const student = {
 };
 
 export default student;
+=======
+export const student = {
+  name: 'Arya Panji Vici Ayanda',
+  nickname: 'Arya',
+  id: '26110300014',
+  email: 'arya.panji@student.cakrawala.ac.id',
+  program: 'Teknik Informatika',
+  faculty: 'Fakultas Ilmu Komputer',
+  activeSemester: 3,
+  activeAcademicYear: 'Ganjil 2026/2027',
+  totalSKS: 20,
+  gpa: 3.72,
+};
+>>>>>>> 30a6e27bfed7e0d425c91fdb987e37c56bccf6e8

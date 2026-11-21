@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * RISE Module — Attendance Records Data
  * Per-course attendance records with 10-12 meetings each for active semester 3.
@@ -89,10 +90,53 @@ export const attendance = [
     lecturer: "Hendra Wijaya, M.Kom",
     totalMeetings: 11,
     present: 11,
+=======
+export const attendance = [
+  {
+    courseId: 'if301',
+    courseCode: 'IF301',
+    courseName: 'Pemrograman Web',
+    totalMeetings: 13,
+    present: 11,
+    absent: 1,
+    excused: 1,
+    late: 0,
+    percentage: 92,
+  },
+  {
+    courseId: 'if302',
+    courseCode: 'IF302',
+    courseName: 'Basis Data',
+    totalMeetings: 13,
+    present: 12,
+    absent: 0,
+    excused: 1,
+    late: 0,
+    percentage: 100,
+  },
+  {
+    courseId: 'if303',
+    courseCode: 'IF303',
+    courseName: 'Algoritma & Struktur Data',
+    totalMeetings: 13,
+    present: 10,
+    absent: 2,
+    excused: 0,
+    late: 1,
+    percentage: 85,
+  },
+  {
+    courseId: 'if304',
+    courseCode: 'IF304',
+    courseName: 'Sistem Operasi',
+    totalMeetings: 13,
+    present: 13,
+>>>>>>> 30a6e27bfed7e0d425c91fdb987e37c56bccf6e8
     absent: 0,
     excused: 0,
     late: 0,
     percentage: 100,
+<<<<<<< HEAD
     meetings: [
       { id: "ATT-304-01", meetingNumber: 1, date: "2025-09-11", topic: "Model Referensi OSI & TCP/IP Layering", status: "present" },
       { id: "ATT-304-02", meetingNumber: 2, date: "2025-09-18", topic: "Physical & Data Link Layer Protocols", status: "present" },
@@ -169,3 +213,73 @@ export const overallAttendance = {
 };
 
 export default attendance;
+=======
+  },
+  {
+    courseId: 'if305',
+    courseCode: 'IF305',
+    courseName: 'Matematika Diskrit',
+    totalMeetings: 13,
+    present: 9,
+    absent: 3,
+    excused: 1,
+    late: 0,
+    percentage: 77,
+  },
+  {
+    courseId: 'if306',
+    courseCode: 'IF306',
+    courseName: 'Rekayasa Perangkat Lunak',
+    totalMeetings: 13,
+    present: 12,
+    absent: 0,
+    excused: 0,
+    late: 1,
+    percentage: 100,
+  },
+  {
+    courseId: 'if307',
+    courseCode: 'IF307',
+    courseName: 'Jaringan Komputer',
+    totalMeetings: 13,
+    present: 11,
+    absent: 1,
+    excused: 1,
+    late: 0,
+    percentage: 92,
+  },
+  {
+    courseId: 'mk201',
+    courseCode: 'MK201',
+    courseName: 'Kewirausahaan Digital',
+    totalMeetings: 13,
+    present: 13,
+    absent: 0,
+    excused: 0,
+    late: 0,
+    percentage: 100,
+  },
+];
+
+export const attendanceHistory = [
+  { id: 'h001', date: '21 Nov 2026', courseCode: 'IF301', courseName: 'Pemrograman Web', status: 'present', notes: '' },
+  { id: 'h002', date: '20 Nov 2026', courseCode: 'IF302', courseName: 'Basis Data', status: 'present', notes: '' },
+  { id: 'h003', date: '19 Nov 2026', courseCode: 'IF303', courseName: 'Algoritma & Struktur Data', status: 'late', notes: 'Terlambat 10 menit' },
+  { id: 'h004', date: '19 Nov 2026', courseCode: 'IF304', courseName: 'Sistem Operasi', status: 'present', notes: '' },
+  { id: 'h005', date: '18 Nov 2026', courseCode: 'IF305', courseName: 'Matematika Diskrit', status: 'absent', notes: 'Tidak hadir tanpa keterangan' },
+  { id: 'h006', date: '18 Nov 2026', courseCode: 'IF306', courseName: 'Rekayasa Perangkat Lunak', status: 'present', notes: '' },
+  { id: 'h007', date: '17 Nov 2026', courseCode: 'IF307', courseName: 'Jaringan Komputer', status: 'present', notes: '' },
+  { id: 'h008', date: '17 Nov 2026', courseCode: 'MK201', courseName: 'Kewirausahaan Digital', status: 'present', notes: '' },
+  { id: 'h009', date: '14 Nov 2026', courseCode: 'IF301', courseName: 'Pemrograman Web', status: 'present', notes: '' },
+  { id: 'h010', date: '13 Nov 2026', courseCode: 'IF302', courseName: 'Basis Data', status: 'excused', notes: 'Izin acara keluarga' },
+  { id: 'h011', date: '12 Nov 2026', courseCode: 'IF303', courseName: 'Algoritma & Struktur Data', status: 'present', notes: '' },
+  { id: 'h012', date: '12 Nov 2026', courseCode: 'IF304', courseName: 'Sistem Operasi', status: 'present', notes: '' },
+  { id: 'h013', date: '11 Nov 2026', courseCode: 'IF305', courseName: 'Matematika Diskrit', status: 'absent', notes: '' },
+  { id: 'h014', date: '11 Nov 2026', courseCode: 'IF306', courseName: 'Rekayasa Perangkat Lunak', status: 'present', notes: '' },
+  { id: 'h015', date: '10 Nov 2026', courseCode: 'IF307', courseName: 'Jaringan Komputer', status: 'present', notes: '' },
+];
+
+export const overallAttendance = Math.round(
+  attendance.reduce((sum, c) => sum + c.percentage, 0) / attendance.length
+);
+>>>>>>> 30a6e27bfed7e0d425c91fdb987e37c56bccf6e8

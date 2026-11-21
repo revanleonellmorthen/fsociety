@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * RISE Module — Active Semester 3 Courses
  * Matched with TRACK module active course pool (IF301 - IF306).
@@ -122,3 +123,138 @@ export const courses = [
 ];
 
 export default courses;
+=======
+export const courses = [
+  {
+    id: 'if301',
+    code: 'IF301',
+    name: 'Pemrograman Web',
+    lecturer: 'Dr. Rendra Kusuma, M.Kom',
+    lecturerId: 'L001',
+    sks: 3,
+    credits: 3,
+    progress: 65,
+    assignmentCount: 3,
+    description: 'Mata kuliah ini membahas konsep dan teknik pengembangan aplikasi web modern menggunakan HTML5, CSS3, JavaScript, serta framework React. Mahasiswa akan belajar membuat aplikasi web yang responsif dan interaktif.',
+    schedule: [
+      { day: 'Senin', time: '08:00–10:30', room: 'Lab Komputer 2', isOnline: false },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'if302',
+    code: 'IF302',
+    name: 'Basis Data',
+    lecturer: 'Dr. Sari Dewi Utami, M.T',
+    lecturerId: 'L002',
+    sks: 3,
+    credits: 3,
+    progress: 72,
+    assignmentCount: 2,
+    description: 'Membahas konsep sistem basis data relasional, perancangan ERD, normalisasi, serta implementasi SQL untuk manipulasi dan query data. Termasuk pengantar basis data NoSQL.',
+    schedule: [
+      { day: 'Selasa', time: '10:00–12:30', room: 'Ruang K201', isOnline: false },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'if303',
+    code: 'IF303',
+    name: 'Algoritma & Struktur Data',
+    lecturer: 'Prof. Bambang Heru, Ph.D',
+    lecturerId: 'L003',
+    sks: 4,
+    credits: 4,
+    progress: 58,
+    assignmentCount: 4,
+    description: 'Mata kuliah inti yang membahas algoritma dasar (sorting, searching, recursion), struktur data (linked list, stack, queue, tree, graph), dan analisis kompleksitas algoritma.',
+    schedule: [
+      { day: 'Rabu', time: '08:00–10:30', room: 'Ruang K101', isOnline: false },
+      { day: 'Jumat', time: '08:00–09:40', room: 'Lab Komputer 1', isOnline: false },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'if304',
+    code: 'IF304',
+    name: 'Sistem Operasi',
+    lecturer: 'Dr. Hendra Pratama, M.Cs',
+    lecturerId: 'L004',
+    sks: 3,
+    credits: 3,
+    progress: 80,
+    assignmentCount: 2,
+    description: 'Mempelajari konsep sistem operasi modern: manajemen proses, memori, file system, I/O, sinkronisasi, dan keamanan. Praktikum menggunakan Linux.',
+    schedule: [
+      { day: 'Rabu', time: '13:00–15:30', room: 'Zoom Meeting', isOnline: true, zoomUrl: 'https://zoom.us/j/98765432101' },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'if305',
+    code: 'IF305',
+    name: 'Matematika Diskrit',
+    lecturer: 'Dr. Lia Anggraeni, M.Si',
+    lecturerId: 'L005',
+    sks: 3,
+    credits: 3,
+    progress: 45,
+    assignmentCount: 3,
+    description: 'Dasar matematika untuk ilmu komputer: logika proposisional, teori himpunan, fungsi dan relasi, kombinatorik, teori graf, dan teori bilangan.',
+    schedule: [
+      { day: 'Kamis', time: '08:00–10:30', room: 'Ruang K102', isOnline: false },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'if306',
+    code: 'IF306',
+    name: 'Rekayasa Perangkat Lunak',
+    lecturer: 'Dr. Dian Rahma, M.T',
+    lecturerId: 'L006',
+    sks: 3,
+    credits: 3,
+    progress: 70,
+    assignmentCount: 2,
+    description: 'Proses pengembangan perangkat lunak mulai dari analisis kebutuhan, desain sistem, implementasi, pengujian, hingga pemeliharaan. Menggunakan metodologi Agile dan Scrum.',
+    schedule: [
+      { day: 'Kamis', time: '13:00–15:30', room: 'Zoom Meeting', isOnline: true, zoomUrl: 'https://zoom.us/j/98765432102' },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'if307',
+    code: 'IF307',
+    name: 'Jaringan Komputer',
+    lecturer: 'Dr. Agus Setiawan, M.Kom',
+    lecturerId: 'L007',
+    sks: 3,
+    credits: 3,
+    progress: 55,
+    assignmentCount: 2,
+    description: 'Mempelajari arsitektur jaringan komputer, protokol komunikasi (TCP/IP, HTTP, DNS), keamanan jaringan, dan konfigurasi router/switch dasar.',
+    schedule: [
+      { day: 'Jumat', time: '10:00–12:30', room: 'Lab Jaringan', isOnline: false },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'mk201',
+    code: 'MK201',
+    name: 'Kewirausahaan Digital',
+    lecturer: 'Dr. Maya Sari, M.B.A',
+    lecturerId: 'L008',
+    sks: 2,
+    credits: 2,
+    progress: 90,
+    assignmentCount: 1,
+    description: 'Mengembangkan jiwa kewirausahaan di era digital: ideasi produk digital, model bisnis canvas, validasi pasar, strategi pemasaran digital, dan pitch deck.',
+    schedule: [
+      { day: 'Senin', time: '13:00–14:40', room: 'Zoom Meeting', isOnline: true, zoomUrl: 'https://zoom.us/j/98765432103' },
+    ],
+    status: 'active',
+  },
+];
+
+export const getCourseById = (id) => courses.find((c) => c.id === id);
+>>>>>>> 30a6e27bfed7e0d425c91fdb987e37c56bccf6e8

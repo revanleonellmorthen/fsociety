@@ -32,7 +32,7 @@ export default function AcademicRecords() {
           <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 16 }}>
             <div style={{
               width: 60, height: 60, borderRadius: 16, flexShrink: 0,
-              background: 'linear-gradient(135deg,#2563EB,#0EA5E9)',
+              background: 'linear-gradient(135deg,#07455C,#082F3D)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: 'white', fontSize: 20, fontWeight: 800,
             }}>

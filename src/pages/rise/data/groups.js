@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * RISE Module — Group Workspace & Activity Log Data
  * Contains collaborative groups for course projects and audit activity logs.
@@ -405,3 +406,153 @@ export const activityLog = [
 ];
 
 export default groups;
+=======
+export const groups = [
+  {
+    id: 'g001',
+    name: 'Kelompok Alpha',
+    courseId: 'if303',
+    courseCode: 'IF303',
+    courseName: 'Algoritma & Struktur Data',
+    assignmentTitle: 'Implementasi Binary Search Tree',
+    members: [
+      { id: 'm1', name: 'Arya Panji Vici Ayanda', role: 'Ketua', avatar: 'AP' },
+      { id: 'm2', name: 'Budi Santoso', role: 'Anggota', avatar: 'BS' },
+      { id: 'm3', name: 'Citra Dewi', role: 'Anggota', avatar: 'CD' },
+      { id: 'm4', name: 'Dian Firmansyah', role: 'Anggota', avatar: 'DF' },
+    ],
+    tasks: [
+      {
+        id: 't1',
+        title: 'Setup repository dan struktur proyek',
+        assignedTo: 'm1',
+        assignedToName: 'Arya Panji',
+        description: 'Buat repo GitHub, setup struktur folder, konfigurasi Python virtual environment.',
+        deadline: '22 Nov 2026',
+        status: 'done',
+      },
+      {
+        id: 't2',
+        title: 'Implementasi class Node dan BST',
+        assignedTo: 'm1',
+        assignedToName: 'Arya Panji',
+        description: 'Buat class Node dan BST dengan operasi insert, delete, search.',
+        deadline: '24 Nov 2026',
+        status: 'in_progress',
+      },
+      {
+        id: 't3',
+        title: 'Implementasi traversal (inorder, preorder, postorder)',
+        assignedTo: 'm2',
+        assignedToName: 'Budi Santoso',
+        description: 'Tambahkan metode traversal ke class BST.',
+        deadline: '25 Nov 2026',
+        status: 'in_progress',
+      },
+      {
+        id: 't4',
+        title: 'Unit testing semua operasi',
+        assignedTo: 'm3',
+        assignedToName: 'Citra Dewi',
+        description: 'Tulis unit test menggunakan pytest untuk semua operasi BST.',
+        deadline: '26 Nov 2026',
+        status: 'todo',
+      },
+      {
+        id: 't5',
+        title: 'Visualisasi BST dengan ASCII art',
+        assignedTo: 'm4',
+        assignedToName: 'Dian Firmansyah',
+        description: 'Buat fungsi untuk menampilkan struktur BST sebagai ASCII art di terminal.',
+        deadline: '26 Nov 2026',
+        status: 'todo',
+      },
+      {
+        id: 't6',
+        title: 'Menulis laporan dan dokumentasi',
+        assignedTo: 'm3',
+        assignedToName: 'Citra Dewi',
+        description: 'Buat laporan analisis kompleksitas dan dokumentasi kode.',
+        deadline: '27 Nov 2026',
+        status: 'todo',
+      },
+    ],
+    activityLog: [
+      { id: 'al1', memberId: 'm1', memberName: 'Arya Panji', action: 'upload', description: 'Mengunggah file initial_bst.py', timestamp: '21 Nov 2026, 14:32' },
+      { id: 'al2', memberId: 'm2', memberName: 'Budi Santoso', action: 'comment', description: 'Meninggalkan komentar di task "Implementasi traversal"', timestamp: '21 Nov 2026, 11:15' },
+      { id: 'al3', memberId: 'm1', memberName: 'Arya Panji', action: 'status', description: 'Mengubah status "Setup repository" menjadi Done', timestamp: '20 Nov 2026, 20:44' },
+      { id: 'al4', memberId: 'm3', memberName: 'Citra Dewi', action: 'join', description: 'Bergabung ke grup diskusi', timestamp: '20 Nov 2026, 09:00' },
+      { id: 'al5', memberId: 'm4', memberName: 'Dian Firmansyah', action: 'comment', description: 'Meninggalkan komentar di task "Visualisasi BST"', timestamp: '19 Nov 2026, 16:20' },
+      { id: 'al6', memberId: 'm1', memberName: 'Arya Panji', action: 'upload', description: 'Mengunggah struktur folder proyek', timestamp: '19 Nov 2026, 10:00' },
+    ],
+    messages: [
+      { id: 'msg1', senderId: 'm2', senderName: 'Budi Santoso', senderAvatar: 'BS', text: 'Halo semua! Saya sudah mulai kerjain bagian traversal. Ada yang perlu didiskusikan soal inorder traversal rekursif vs iteratif?', timestamp: '21 Nov 2026, 11:15' },
+      { id: 'msg2', senderId: 'm1', senderName: 'Arya Panji', senderAvatar: 'AP', text: 'Bagus Budi! Kayaknya lebih baik implementasi kedua-duanya untuk nilai plus. Deadline masih 28 Nov jadi masih ada waktu.', timestamp: '21 Nov 2026, 13:40' },
+      { id: 'msg3', senderId: 'm3', senderName: 'Citra Dewi', senderAvatar: 'CD', text: 'Setuju! Saya akan mulai nulis test case setelah implementasi traversal selesai. Tolong kabari kalau sudah ready ya Budi.', timestamp: '21 Nov 2026, 14:00' },
+    ],
+  },
+  {
+    id: 'g002',
+    name: 'Tim WebDev Kami',
+    courseId: 'if301',
+    courseCode: 'IF301',
+    courseName: 'Pemrograman Web',
+    assignmentTitle: 'Implementasi REST API dengan Node.js',
+    members: [
+      { id: 'n1', name: 'Arya Panji Vici Ayanda', role: 'Ketua', avatar: 'AP' },
+      { id: 'n2', name: 'Eka Prasetya', role: 'Anggota', avatar: 'EP' },
+      { id: 'n3', name: 'Fitri Handayani', role: 'Anggota', avatar: 'FH' },
+    ],
+    tasks: [
+      {
+        id: 'nt1',
+        title: 'Setup Express server dan middleware',
+        assignedTo: 'n1',
+        assignedToName: 'Arya Panji',
+        description: 'Inisialisasi project Node.js, install dependencies (express, mongoose, dotenv), setup middleware CORS dan body-parser.',
+        deadline: '25 Nov 2026',
+        status: 'done',
+      },
+      {
+        id: 'nt2',
+        title: 'Desain schema MongoDB dan model',
+        assignedTo: 'n2',
+        assignedToName: 'Eka Prasetya',
+        description: 'Buat schema Mongoose untuk entitas Book (title, author, isbn, genre, year, stock).',
+        deadline: '26 Nov 2026',
+        status: 'in_progress',
+      },
+      {
+        id: 'nt3',
+        title: 'Implementasi CRUD endpoints',
+        assignedTo: 'n1',
+        assignedToName: 'Arya Panji',
+        description: 'GET all books, GET by id, POST create, PUT update, DELETE book.',
+        deadline: '30 Nov 2026',
+        status: 'todo',
+      },
+      {
+        id: 'nt4',
+        title: 'Buat Postman Collection dokumentasi',
+        assignedTo: 'n3',
+        assignedToName: 'Fitri Handayani',
+        description: 'Dokumentasikan semua endpoint dalam Postman Collection dengan contoh request & response.',
+        deadline: '8 Des 2026',
+        status: 'todo',
+      },
+    ],
+    activityLog: [
+      { id: 'nal1', memberId: 'n1', memberName: 'Arya Panji', action: 'upload', description: 'Mengunggah initial Express server setup', timestamp: '20 Nov 2026, 15:00' },
+      { id: 'nal2', memberId: 'n2', memberName: 'Eka Prasetya', action: 'status', description: 'Mulai mengerjakan schema MongoDB', timestamp: '21 Nov 2026, 09:30' },
+      { id: 'nal3', memberId: 'n3', memberName: 'Fitri Handayani', action: 'comment', description: 'Menambahkan catatan di task dokumentasi Postman', timestamp: '21 Nov 2026, 12:00' },
+    ],
+    messages: [
+      { id: 'nmsg1', senderId: 'n2', senderName: 'Eka Prasetya', senderAvatar: 'EP', text: 'Saya sudah mulai schema Mongoose untuk Book. Apakah perlu ada field rating juga?', timestamp: '21 Nov 2026, 09:35' },
+      { id: 'nmsg2', senderId: 'n1', senderName: 'Arya Panji', senderAvatar: 'AP', text: 'Bagus Eka! Tambahkan saja field rating (Number, 0-5) dan description. Lebih lengkap lebih baik untuk nilai.', timestamp: '21 Nov 2026, 10:00' },
+      { id: 'nmsg3', senderId: 'n3', senderName: 'Fitri Handayani', senderAvatar: 'FH', text: 'Siap! Saya mulai setup Postman workspace dulu sambil tunggu endpoints selesai ya.', timestamp: '21 Nov 2026, 10:15' },
+    ],
+  },
+];
+
+export const getGroupById = (id) => groups.find((g) => g.id === id);
+>>>>>>> 30a6e27bfed7e0d425c91fdb987e37c56bccf6e8

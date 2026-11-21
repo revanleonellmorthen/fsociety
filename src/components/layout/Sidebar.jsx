@@ -110,8 +110,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
             
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/track#jadwal') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/track#jadwal')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/track') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/track')}
               title="Jadwal Kuliah"
             >
               <span className="cw-sidebar__item-icon">
@@ -122,8 +122,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/track#kalender') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/track#kalender')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/track') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/track')}
               title="Kalender Akademik"
             >
               <span className="cw-sidebar__item-icon">
@@ -134,8 +134,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/track#krs') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/track#krs')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/track') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/track')}
               title="Rencana Studi (KRS)"
             >
               <span className="cw-sidebar__item-icon">
@@ -146,8 +146,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/track#khs') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/track#khs')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/track') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/track')}
               title="Hasil Studi (KHS)"
             >
               <span className="cw-sidebar__item-icon">
@@ -158,8 +158,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/track#tagihan') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/track#tagihan')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/track') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/track')}
               title="Tagihan UKT"
             >
               <span className="cw-sidebar__item-icon">
@@ -175,8 +175,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/rise#courses') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/rise#courses')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/rise') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/rise')}
               title="Kursus Aktif"
             >
               <span className="cw-sidebar__item-icon">
@@ -187,8 +187,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/rise#assignments') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/rise#assignments')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/rise') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/rise')}
               title="Tugas & Kuis"
             >
               <span className="cw-sidebar__item-icon">
@@ -204,8 +204,8 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse, isMobileOpen, onCloseMo
 
             <button
               type="button"
-              className={`cw-sidebar__item ${isItemActive('/rise#forum') ? 'cw-sidebar__item--active' : ''}`}
-              onClick={() => handleNavClick('/rise#forum')}
+              className={`cw-sidebar__item ${currentPath.startsWith('/rise') ? 'cw-sidebar__item--active' : ''}`}
+              onClick={() => handleNavClick('/rise')}
               title="Forum Diskusi"
             >
               <span className="cw-sidebar__item-icon">

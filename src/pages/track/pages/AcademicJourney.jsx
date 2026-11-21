@@ -13,8 +13,8 @@ const activityIcons = {
   cpu:   <Route size={18} />,
 };
 
-const activityColors = ['#2563EB', '#10B981', '#6366F1', '#F59E0B'];
-const activityBgs   = ['#EFF6FF', '#ECFDF5', '#EEF2FF', '#FFFBEB'];
+const activityColors = ['#07455C', '#10B981', '#6366F1', '#F59E0B'];
+const activityBgs   = ['#F1F5F4', '#ECFDF5', '#EEF2FF', '#FFFBEB'];
 
 export default function AcademicJourney() {
   const [historyOpen, setHistoryOpen] = useState(false);

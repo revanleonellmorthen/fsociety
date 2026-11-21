@@ -72,26 +72,68 @@
 /* ==========================================================================
    SECTION A: WELCOME SECTION
    ========================================================================== */
+/* ==========================================================================
+   WELCOME SECTION — full white-on-dark gradient card
+   ========================================================================== */
 .cw-welcome-section {
   position: relative;
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
+  background: linear-gradient(135deg, var(--color-deep-teal) 0%, #0a5f7e 55%, #0d6b5e 100%);
+  border: none;
   border-radius: var(--radius-2xl);
-  padding: clamp(24px, 4vw, 36px);
-  box-shadow: var(--shadow-sm);
+  padding: clamp(28px, 4vw, 40px);
   overflow: hidden;
+  box-shadow: 0 8px 32px rgba(7,69,92,0.3);
 }
 
-/* Subtle decorative warm gold accent line at top */
+/* Subtle gold accent line at top-left corner */
 .cw-welcome-section::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-dark-teal) 0%, var(--color-gold) 50%, var(--color-dark-teal) 100%);
+  background: linear-gradient(90deg, var(--color-gold) 0%, transparent 60%);
+  opacity: 0.9;
 }
+
+/* Force all direct text in the card to white */
+.cw-welcome-section .cw-welcome-title,
+.cw-welcome-section .cw-welcome-desc,
+.cw-welcome-section .cw-glance-item {
+  color: rgba(255,255,255,0.95);
+}
+
+/* Name highlight — Gold instead of Dark Teal (now on dark bg) */
+.cw-welcome-section .cw-highlight-name {
+  color: var(--color-gold);
+}
+
+/* Date badge — frosted glass pill */
+.cw-welcome-section .cw-date-badge {
+  background-color: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(4px);
+}
+
+/* Semester tag — lighter white */
+.cw-welcome-section .cw-semester-tag {
+  color: rgba(255,255,255,0.75);
+}
+
+/* Meta divider dot */
+.cw-welcome-section .cw-meta-divider {
+  color: rgba(255,255,255,0.4);
+}
+
+/* Glance bar divider */
+.cw-welcome-section .cw-glance-bar {
+  border-top-color: rgba(255,255,255,0.15);
+}
+
+/* Glance dots — keep colored dots visible over dark bg */
+.cw-welcome-section .cw-glance-dot--gold { background-color: var(--color-gold); }
+.cw-welcome-section .cw-glance-dot--teal { background-color: rgba(255,255,255,0.7); }
+.cw-welcome-section .cw-glance-dot--green { background-color: #4ade80; }
 
 .cw-welcome-content {
   display: flex;
